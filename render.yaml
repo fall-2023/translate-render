@@ -1,12 +1,23 @@
 services:
   - name: libretranslate
     env:
-      - key: LT_LANG_MODEL
-        value: "transformer.wmt19.en-de"
-      - key: PORT
-        value: 5000
-    buildCommand: "docker build -t libretranslate ."
+      - key: LIBRETRANSLATE_LANGUAGES
+        value: "en,de"
+     # - key: LT_LANG_MODEL
+     #   value: "transformer.wmt19.en-de"
+     # - key: PORT
+     #   value: 5000
+    image: "libretranslate/libretranslate:latest"
+    ports:
+      - 5000:5000
+    healthcheck:
+      http_path: /translate
+      http_status: 200
+      timeout_seconds: 5
+      interval_seconds: 10
+      unhealthy_threshold: 3
+    #buildCommand: "docker build -t libretranslate ."
     #startCommand: "docker run -p 5000:5000 libretranslate"
-    startCommand: "docker run -p libretranslate"
-    healthCheckPath: "/"
-    healthCheckPort: 5000
+    #startCommand: "docker run -p libretranslate"
+    #healthCheckPath: "/"
+    #healthCheckPort: 5000
