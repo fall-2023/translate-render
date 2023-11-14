@@ -23,8 +23,8 @@ services:
       timeout_seconds: 5
       interval_seconds: 10
       unhealthy_threshold: 3
-    #buildCommand: "docker build -t libretranslate ."
-    #startCommand: "docker run -p 5000:5000 libretranslate"
-    #startCommand: "docker run -p libretranslate"
+    buildCommand: "docker build -t libretranslate ."
+    startCommand: "docker run -p 5000:5000 libretranslate"
+    startCommand: "docker run -p libretranslate"
     #healthCheckPath: "/"
     #healthCheckPort: 5000
