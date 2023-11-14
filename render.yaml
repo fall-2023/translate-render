@@ -3,6 +3,8 @@ services:
     env:
       - key: LIBRETRANSLATE_LANGUAGES
         value: "en,de"
+      - key: PYTHON_VERSION
+        value: "3.8.2"
      # - key: LT_LANG_MODEL
      #   value: "transformer.wmt19.en-de"
      # - key: PORT
