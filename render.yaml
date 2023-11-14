@@ -9,7 +9,12 @@ services:
      #   value: "transformer.wmt19.en-de"
      # - key: PORT
      #   value: 5000
-    image: "libretranslate/libretranslate:latest"
+    runtime: #image
+      image: "libretranslate/libretranslate:latest"
+      url: docker.io/libretranslate/libretranslate:latest  
+      creds:
+        fromRegistryCreds:
+        name: docker
     ports:
       - 5000:5000
     healthcheck:
