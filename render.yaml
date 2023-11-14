@@ -1,33 +1,9 @@
 services:
-  # A Docker web service
-  - type: web
-    name: webdis
-    #runtime: docker
-    runtime: image
-      image:
-      url: docker.io/libretranslate/libretranslate:latest  
-      creds:
-        fromRegistryCreds:
-        name: docker
-    #repo: https://github.com/render-examples/webdis.git # optional
-    #region: oregon # optional (defaults to oregon)
-    #plan: standard # optional (defaults to starter instance type)
-    #branch: master # optional (defaults to master)
-    #rootDir: webdis
-    #dockerCommand: ./webdis.sh # optional (defaults to Dockerfile command)
-    #numInstances:  1 # optional (defaults to 1)
-    healthCheckPath: /
-    envVars:
-      - key: PORT
-        value: 8000
-      - key: REDIS_HOST
-        fromService:
-          type: redis
-          name: lightning
-          property: host # available properties are listed below
-      - key: REDIS_PORT
-        fromService:
-          type: redis
-          name: lightning
-          property: port
-      - fromGroup: conc-settings
+  - name: libretranslate
+    env:
+      - key: LT_LANG_MODEL
+        value: "transformer.wmt19.en-de"
+    buildCommand: "docker build -t libretranslate-image ."
+    startCommand: "docker run -p 5000:5000 libretranslate-image"
+    healthCheckPath: "/"
+    healthCheckPort: 5000
